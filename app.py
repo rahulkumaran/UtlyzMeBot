@@ -163,8 +163,4 @@ if __name__=='__main__':
 
 	dispatcher.add_handler(CommandHandler('transfers',transfers))
 	
-	updater.start_webhook(listen="0.0.0.0",
-                      port=PORT,
-                      url_path=TOKEN)
-	updater.bot.set_webhook("https://telegram-utlyz-me-bot.herokuapp.com/" + TOKEN)
-	updater.idle()
+	updater.start_polling()
