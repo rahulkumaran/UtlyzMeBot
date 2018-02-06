@@ -1,1 +1,1 @@
-web: gunicorn main.wsgi
+mobile: gunicorn main.wsgi
