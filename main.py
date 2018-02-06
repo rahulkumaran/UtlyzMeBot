@@ -152,12 +152,6 @@ if __name__=='__main__':
 	
 	dispatcher = updater.dispatcher
 
-	updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
-
-	updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
-
-	updater.idle()
-
 	dispatcher.add_handler(CommandHandler('start',start))
 
 	dispatcher.add_handler(CommandHandler('help',help))
@@ -169,3 +163,10 @@ if __name__=='__main__':
 	dispatcher.add_handler(CommandHandler('football',football))
 
 	dispatcher.add_handler(CommandHandler('transfers',transfers))
+	
+	updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
+
+	updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
+
+	updater.idle()
+
