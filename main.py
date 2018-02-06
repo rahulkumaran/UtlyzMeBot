@@ -142,7 +142,12 @@ if __name__=='__main__':
 
 	NAME = 'utlyzmebot'
 
-	PORT = os.environ.get('PORT')
+	ON_HEROKU = os.environ.get('ON_HEROKU')
+
+	if ON_HEROKU:
+    		PORT = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+	else:
+    		PORT = 3000
 
 	#logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
@@ -164,7 +169,7 @@ if __name__=='__main__':
 
 	dispatcher.add_handler(CommandHandler('transfers',transfers))
 	
-	updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
+	updater.start_webhook(listen="0.0.0.0",port=PORT,url_path=TOKEN)
 
 	updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
 
