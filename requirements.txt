@@ -1,5 +1,4 @@
 python-telegram-bot==9.0.0
-logging==0.4.9.6
 requests==2.18.4
 telepot==12.5
 wikipedia==1.4.0
