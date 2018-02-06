@@ -1,1 +1,1 @@
-mobile: gunicorn main.wsgi
+web: python main.py
