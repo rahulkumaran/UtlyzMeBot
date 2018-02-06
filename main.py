@@ -1,6 +1,5 @@
 from telegram.ext import CommandHandler, Updater
 from telegram import *
-import logging
 import requests
 import telepot
 import re
@@ -145,9 +144,9 @@ if __name__=='__main__':
 
 	PORT = os.environ.get('PORT')
 
-	logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
+	#logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
-	logger = logging.getLogger(__name__)
+	#logger = logging.getLogger(__name__)
 
 	updater = Updater(token=TOKEN)
 	
