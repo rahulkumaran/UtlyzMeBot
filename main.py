@@ -147,8 +147,10 @@ if __name__=='__main__':
 
 	logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
+	logger = logging.getLogger(__name__)
 
 	updater = Updater(token=TOKEN)
+	
 	dispatcher = updater.dispatcher
 
 	updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
