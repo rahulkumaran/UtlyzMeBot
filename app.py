@@ -115,7 +115,7 @@ def transfers(bot, update):
 	transfer = "\nThe latest Transfer news & rumours are displayed below:\n"
 	transfer +="--------------------------------------------------------------------\n"
 	for i in rumours:
-		transfer += "->"+i.text
+		transfer += "->"+i.text+"yes"
 		transfer += "\n--------------------------------------------------------------------\n"
 
 	bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
