@@ -183,16 +183,16 @@ if __name__=='__main__':
 	
 	dispatcher = updater.dispatcher
 
-	dispatcher.add_handler(CommandHandler('start', start))
+	dispatcher.add_handler(CommandHandler('start',start))
 
-	dispatcher.add_handler(CommandHandler('help', help))
+	dispatcher.add_handler(CommandHandler('help',help))
 
-	dispatcher.add_handler(CommandHandler('news', news))
+	dispatcher.add_handler(CommandHandler('news',news))
 
-	dispatcher.add_handler(CommandHandler('lyrics',l yrics, pass_args = True))
+	dispatcher.add_handler(CommandHandler('lyrics',lyrics,pass_args = True))
 
-	dispatcher.add_handler(CommandHandler('wiki',wiki, pass_args = True))
+	dispatcher.add_handler(CommandHandler('wiki',wiki,pass_args = True))
 	
-	dispatcher.add_handler(CommandHandler('fb',fb, pass_args = True))
+	dispatcher.add_handler(CommandHandler('fb',fb,pass_args = True))
 	
 	updater.start_polling()
