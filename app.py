@@ -121,8 +121,7 @@ def help(bot, update):
 		The following are the avaiable commands with me!\n
 		/news				To get news bulletins
 		/lyrics <name_of_song>		To get lyrics of songs
-		/football			To get latest football scores
-		/transfer			To get football transfer updates
+		/wiki <topic>			To get wikipedia summary on a given topic
 	''')
 
 
