@@ -6,7 +6,7 @@ import re
 import wikipedia
 from bs4 import BeautifulSoup
 import os
-
+import mechanize
 
 
 
@@ -46,6 +46,37 @@ def start(bot,update):
 		Hey %s %s! Welcome to UtlyzMeBot! Type /help for more information regarding the functionalities of this particular bot. In short, this bot will help you search wiki, google, get news bulletins and what not from this particular chat window itself :D 
 	''' %(update.message.from_user.first_name,update.message.from_user.last_name))
 
+
+def fb(bot, update, args):
+	browser = mechanize.Browser()
+	browser.set_handle_robots(False)	#Allows everything to be written
+	cookies = mechanize.CookieJar()
+	browser.set_cookiejar(cookies)
+	browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7')]
+	browser.set_handle_refresh(False)	#Sometimes hangs without this
+	try:
+		
+		url = 'http://www.facebook.com/login.php'
+		soup = authenticate(browser, url, args[0], args[1])	#Parses the html and stores in 'soup'
+		fr_num_box = soup.find('span',attrs={'id':'requestsCountValue'})		#Finds span tags with the given ID
+		info = "You have %s new friend requests\n" %(fr_num_box.text)		#Displays and gives the string between the span tags (<span>...</span>)
+
+		msg_num_box = soup.find('span',attrs={'id':'mercurymessagesCountValue'})
+		info +="You have %s unread messages\n" %(msg_num_box.text)
+
+		notifs_num_box = soup.find('span',attrs={'id':'notificationsCountValue'})
+		info += "You have %s unread notifications"%(str(int(notifs_num_box.text)+1))
+
+		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
+		bot.sendMessage(chat_id = update.message.chat_id, text = info)
+
+	except AttributeError:
+		error = "Either the password or email id you've entered is wrong"
+		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
+		bot.sendMessage(chat_id = update.message.chat_id, text = error)
+
+
+
 def news(bot, update):
 	bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
 	url='https://in.reuters.com/news/top-news'
@@ -58,6 +89,7 @@ def news(bot, update):
 			if(i.text != "" ):
                 		bulletins +="->" + i.text + '\n' #printing out text of the blockquote
 	bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = bulletins)
+
 
 
 def lyrics(bot,update,args):
@@ -122,6 +154,7 @@ def help(bot, update):
 		/news				To get news bulletins
 		/lyrics <name_of_song>		To get lyrics of songs
 		/wiki <topic>			To get wikipedia summary on a given topic
+		/fb <email> <password>		To get certain facebook details
 	''')
 
 
