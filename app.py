@@ -55,7 +55,7 @@ def start(bot,update):
 	''' %(update.message.from_user.first_name,update.message.from_user.last_name))
 
 
-def fb(bot, update, args):
+'''def fb(bot, update, args):
 	browser = mechanize.Browser()
 	browser.set_handle_robots(False)	#Allows everything to be written
 	cookies = mechanize.CookieJar()
@@ -81,7 +81,7 @@ def fb(bot, update, args):
 	except AttributeError:
 		error = "Either the password or email id you've entered is wrong"
 		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-		bot.sendMessage(chat_id = update.message.chat_id, text = error)
+		bot.sendMessage(chat_id = update.message.chat_id, text = error)'''
 
 
 
@@ -162,7 +162,6 @@ def help(bot, update):
 		/news				To get news bulletins
 		/lyrics <name_of_song>		To get lyrics of songs
 		/wiki <topic>			To get wikipedia summary on a given topic
-		/fb <email> <password>		To get certain facebook details
 	''')
 
 
@@ -193,6 +192,6 @@ if __name__=='__main__':
 
 	dispatcher.add_handler(CommandHandler('wiki',wiki,pass_args = True))
 	
-	dispatcher.add_handler(CommandHandler('fb',fb,pass_args = True))
+	#dispatcher.add_handler(CommandHandler('fb',fb,pass_args = True))
 	
 	updater.start_polling()
