@@ -111,7 +111,7 @@ def football(bot,update):
 def transfers(bot, update):
 	r = requests.get('http://www.goal.com/en-us/transfer-rumours/1')
 	soup = BeautifulSoup(r.content, 'html.parser')	#Gets HTML of entire page
-	rumours = soup.select(".transfer-card__desc p")
+	rumours = soup.find_all("div",attrs={"class":"transfer-card__desc"})
 	transfer = "\nThe latest Transfer news & rumours are displayed below:\n"
 	transfer +="--------------------------------------------------------------------\n"
 	for i in rumours:
