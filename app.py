@@ -105,7 +105,7 @@ def football(bot,update):
 		scores+= "\n\nNOTE: ALL THE MATCH TIMINGS ARE IN GMT\n\n"
 
 		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-		bot.sendMessage(chat_id = update.message.chat_id, text = scores)
+		bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = scores)
 
 
 def transfers(bot, update):
@@ -119,7 +119,7 @@ def transfers(bot, update):
 		transfer += "\n--------------------------------------------------------------------\n"
 
 	bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-	bot.sendMessage(chat_id = update.message.chat_id, text = transfer)
+	bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = transfer)
 
 
 
