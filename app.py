@@ -90,37 +90,29 @@ def lyrics(bot,update,args):
 	
 
 
-def football(bot,update):
-		r = requests.get('http://www.goal.com/en-in/live-scores')	#Gets HTML of entire page
-		soup = BeautifulSoup(r.content,'html.parser')
-		score_box = soup.find_all('div',attrs={'class':'match-main-data'})	#Navigating to where the score is available in the page
-		scores = "\nThe scores of all matches played recently is displayed below:\n"
-		scores+="--------------------------------------------------------------------\n"
-		for i in score_box:		#To get the score of all live matches and recently done matches
-			if(i.text[3] != 'F'):
-				continue
-			else:
-				scores += i.text + "\n"
-				scores+="--------------------------------------------------------------------\n"
-		scores+= "\n\nNOTE: ALL THE MATCH TIMINGS ARE IN GMT\n\n"
-
+def wiki(bot, update, args):
+	try:
+		topic = ""
+		for arg in args:
+			topic += arg + " "
+		summary = wikipedia.summary(topic, sentences = 30)
+		page = wikipedia.page(topic)
+		extra = "\nFor more details visit " + page.url
+		summary += extra
 		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-		bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = scores)
+		bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = summary)
 
+	except wikipedia.exceptions.DisambiguationError as e:
+		error = "Please be more specific with your search query as there are a couple of other options meaning the same."
+		for options in e.options:
+			error += options.decode("utf-8","ignore")+'\n'
+		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
+		bot.sendMessage(chat_id = update.message.chat_id, text = error)
 
-def transfers(bot, update):
-	r = requests.get('http://www.goal.com/en-us/transfer-rumours/1')
-	soup = BeautifulSoup(r.content, 'html.parser')	#Gets HTML of entire page
-	rumours = soup.find_all("div",attrs={"class":"transfer-card__desc"})
-	transfer = "\nThe latest Transfer news & rumours are displayed below:\n"
-	transfer +="--------------------------------------------------------------------\n"
-	for i in rumours:
-		transfer += "->"+i.text+"yes"
-		transfer += "\n--------------------------------------------------------------------\n"
-
-	bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-	bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = transfer)
-
+	except wikipedia.exceptions.PageError:
+		error = "No messages could be found with the topic you entered!"
+		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
+		bot.sendMessage(chat_id = update.message.chat_id, text = error)
 
 
 def help(bot, update):
@@ -151,16 +143,14 @@ if __name__=='__main__':
 	
 	dispatcher = updater.dispatcher
 
-	dispatcher.add_handler(CommandHandler('start',start))
+	dispatcher.add_handler(CommandHandler('start', start))
 
-	dispatcher.add_handler(CommandHandler('help',help))
+	dispatcher.add_handler(CommandHandler('help', help))
 
-	dispatcher.add_handler(CommandHandler('news',news))
+	dispatcher.add_handler(CommandHandler('news', news))
 
-	dispatcher.add_handler(CommandHandler('lyrics',lyrics,pass_args = True))
+	dispatcher.add_handler(CommandHandler('lyrics',l yrics, pass_args = True))
 
-	dispatcher.add_handler(CommandHandler('football',football))
-
-	dispatcher.add_handler(CommandHandler('transfers',transfers))
+	dispatcher.add_handler(CommandHandler('wiki',wiki, pass_args = True))
 	
 	updater.start_polling()
