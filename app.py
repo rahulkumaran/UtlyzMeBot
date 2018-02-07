@@ -33,7 +33,15 @@ def get_url(args):
 	        break
      #Modifications done to get it compatible with requests module
 	return url
-	
+
+
+def authenticate(browser,url,email,pwd):
+	browser.open(url)
+	browser.select_form(nr = 0)       #This is login-password form -> nr = number = 0
+	browser.form['email'] = email
+	browser.form['pass'] = pwd
+	response = browser.submit()
+	return BeautifulSoup(response,'html.parser')
 
 ################################################################	CODE FOR BOT FUNCTIONALITIES STARTS HERE	########################################################################
 
@@ -68,7 +76,7 @@ def fb(bot, update, args):
 		info += "You have %s unread notifications"%(str(int(notifs_num_box.text)+1))
 
 		bot.sendChatAction(chat_id = update.message.chat_id, action = ChatAction.TYPING)
-		bot.sendMessage(chat_id = update.message.chat_id, text = info)
+		bot.sendMessage(chat_id = update.message.chat_id, parse_mode=ParseMode.HTML, text = info)
 
 	except AttributeError:
 		error = "Either the password or email id you've entered is wrong"
@@ -184,5 +192,7 @@ if __name__=='__main__':
 	dispatcher.add_handler(CommandHandler('lyrics',l yrics, pass_args = True))
 
 	dispatcher.add_handler(CommandHandler('wiki',wiki, pass_args = True))
+	
+	dispatcher.add_handler(CommandHandler('fb',fb, pass_args = True))
 	
 	updater.start_polling()
