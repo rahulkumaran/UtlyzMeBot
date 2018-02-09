@@ -1,4 +1,8 @@
-# UtlyzMeBot
+# UtlyzMeBot [![OpenCode](https://img.shields.io/badge/Open-Code-ff6a00.svg?style=flat-square)](https://opencode18.github.io)
+
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)
+
 A telegram bot which helps you do loads of things from the telegram app itself without you having to migrate from one app to another.<br>
 It allows you to do the following things:<br>
 
