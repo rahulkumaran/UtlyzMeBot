@@ -11,7 +11,6 @@ It allows you to do the following things:<br>
 (3) Ask for the wikipedia summary of a particular topic<br>
 (4) Ask for certain Facebook updates like number of friend requests, unread messages and unseen notifications.<br>
 
-
 ## How To Use This
 One can simply download the Telegram app and type `UtlyzMeBot` in the search coloumn.<br>
 After you find the bot, click on it and then click on the `Start` button to start using the bot!<br>
