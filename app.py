@@ -41,6 +41,7 @@ def authenticate(browser,url,email,pwd):
 	browser.form['email'] = email
 	browser.form['pass'] = pwd
 	response = browser.submit()
+	print("done authenticating")
 	return BeautifulSoup(response,'html.parser')
 
 ################################################################	CODE FOR BOT FUNCTIONALITIES STARTS HERE	########################################################################
