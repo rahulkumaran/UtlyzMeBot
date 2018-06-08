@@ -32,7 +32,6 @@ def get_url(args):
 	        url=i
 	        break
      #Modifications done to get it compatible with requests module
-	print("Done getting url for lyrics")
 	return url
 
 
