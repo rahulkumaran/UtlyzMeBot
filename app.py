@@ -171,6 +171,7 @@ if __name__=='__main__':
 	TOKEN = '482353144:AAHEfKVF_ibk2gAMI3T7sSk37u2ZU8P3PKQ'
 	PORT = int(os.environ.get('PORT', '8443'))
 
+
 	updater = Updater(TOKEN)
 
 	updater = Updater(token=TOKEN)
